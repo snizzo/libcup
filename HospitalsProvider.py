@@ -19,6 +19,10 @@ class HospitalsProvider(JsonHttpRetriever):
         self.setUrl(UrlProvider.estimatedTime(code, priority))
         jsondata = self.load()
 
+        if self.areThereErrors():
+            print "CRITICAL: server side error:", self.rawdata
+            return []
+
         hospitals = []
 
         for jsonregion in jsondata['aziende']:

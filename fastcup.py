@@ -10,6 +10,9 @@ from gi.repository import Notify """
 
 
 from libcup import CUP
+from DateConverter import DateConverter
+from FilterList import FilterList
+from DateFilter import DateFilter
 
 c = CUP()
 
@@ -18,24 +21,35 @@ Get codes for every possible hospital service
 '''
 codes = c.getHospitalServiceCodes()
 
-for code in codes:
-    print code
+#for code in codes:
+#    print code
 
 '''
 Get all available hospital services
 '''
-services = c.getHospitalServices("P395","P","30063","--------------", "2019-09-02")
+services = c.getHospitalServices("P395","P","30063","DSDCLD92E21E473Y", "2019-09-02")
 
-for service in services:
-    print service
+#for service in services:
+#    print service
+
+'''
+Hospital service filtering example
+
+fl = FilterList(services)
+f = DateFilter()
+f.setGreaterThan(DateConverter.today())
+f.setSmallerThan(DateConverter.today()+DateConverter.delta(7))
+fl.addFilter(f)
+print fl.getFiltered()
+'''
 
 '''
 Get every hospital performing HospitalService with code P395 and priority P
 '''
 hospitals = c.getHospitals("P395", "P")
 
-for hospital in hospitals:
-    print hospital
+#for hospital in hospitals:
+#    print hospital
 
 
 

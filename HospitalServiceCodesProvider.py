@@ -10,6 +10,10 @@ class HospitalServiceCodesProvider(JsonHttpRetriever):
         self.setUrl(UrlProvider.hospitalServiceCodes(query))
         json = self.load()
 
+        if self.areThereErrors():
+            print "CRITICAL: server side error:", self.rawdata
+            return []
+
         codes = []
 
         for jsoncode in json:

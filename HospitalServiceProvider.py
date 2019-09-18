@@ -20,6 +20,10 @@ class HospitalServiceProvider(JsonHttpRetriever):
 
         jsonservices = self.load()
 
+        if self.areThereErrors():
+            print "CRITICAL: server side error:", self.rawdata
+            return []
+
         services = []
 
         #generating a single service for every possible combination

@@ -11,6 +11,12 @@ class DateConverter:
     @staticmethod
     def today():
         return datetime.today()
+    
+    @staticmethod
+    def delta(days, hrs=0):
+        hrs = 24*days + hrs
+        return timedelta(hours=hrs)
+
 
     '''
     Converts a libcup formatted string to a datetime to be used
