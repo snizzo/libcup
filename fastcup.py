@@ -27,7 +27,7 @@ codes = c.getHospitalServiceCodes()
 '''
 Get all available hospital services
 '''
-services = c.getHospitalServices("P395","P","30063","-------------", "2019-09-02")
+services = c.getHospitalServices("P395","P","30063","-------------")
 
 #for service in services:
 #    print service
