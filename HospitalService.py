@@ -17,7 +17,7 @@ class HospitalService:
         return self.pcode
     
     @code.setter
-    def setcode(self, code):
+    def code(self, code):
         self.pcode = code
     
     @property
@@ -25,7 +25,7 @@ class HospitalService:
         return self.pdate
     
     @date.setter
-    def setdate(self, date):
+    def date(self, date):
         self.pdate = date
     
     @property
@@ -33,7 +33,7 @@ class HospitalService:
         return self.phospital
     
     @hospital.setter
-    def sethospital(self, hospital):
+    def hospital(self, hospital):
         self.phospital = hospital
     
     @property
@@ -41,7 +41,7 @@ class HospitalService:
         return self.pid_hospital
     
     @id_hospital.setter
-    def setid_hospital(self, id_hospital):
+    def id_hospital(self, id_hospital):
         self.pid_hospital = id_hospital
     
     @property
@@ -49,7 +49,7 @@ class HospitalService:
         return self.punit
     
     @unit.setter
-    def setunit(self, unit):
+    def unit(self, unit):
         self.punit = unit
     
     @property
@@ -57,7 +57,7 @@ class HospitalService:
         return self.pid_unit
     
     @id_unit.setter
-    def setid_unit(self, id_unit):
+    def id_unit(self, id_unit):
         self.pid_unit = id_unit
 
     def __str__(self):

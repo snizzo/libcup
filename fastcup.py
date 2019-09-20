@@ -21,35 +21,35 @@ Get codes for every possible hospital service
 '''
 codes = c.getHospitalServiceCodes()
 
-#for code in codes:
-#    print code
+for code in codes:
+    print(code)
 
 '''
 Get all available hospital services
 '''
-services = c.getHospitalServices("P395","P","30063","-------------")
+services = c.getHospitalServices("P395","P","30063","--------------")
 
-#for service in services:
-#    print service
+for service in services:
+    print(service)
 
 '''
 Hospital service filtering example
-
+'''
 fl = FilterList(services)
 f = DateFilter()
 f.setGreaterThan(DateConverter.today())
-f.setSmallerThan(DateConverter.today()+DateConverter.delta(7))
+f.setSmallerThan(DateConverter.today()+DateConverter.delta(200))
 fl.addFilter(f)
-print fl.getFiltered()
-'''
+print(fl.getFiltered())
+
 
 '''
 Get every hospital performing HospitalService with code P395 and priority P
 '''
 hospitals = c.getHospitals("P395", "P")
 
-#for hospital in hospitals:
-#    print hospital
+for hospital in hospitals:
+    print(hospital)
 
 
 

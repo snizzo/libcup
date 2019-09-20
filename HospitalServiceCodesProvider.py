@@ -8,10 +8,11 @@ class HospitalServiceCodesProvider(JsonHttpRetriever):
 
     def get(self, query=""):
         self.setUrl(UrlProvider.hospitalServiceCodes(query))
+
         json = self.load()
 
         if self.areThereErrors():
-            print "CRITICAL: server side error:", self.rawdata
+            print("CRITICAL: server side error:", self.rawdata)
             return []
 
         codes = []

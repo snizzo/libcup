@@ -13,7 +13,7 @@ class HospitalServiceCode:
         return self.pcode
     
     @code.setter
-    def setcode(self, code):
+    def code(self, code):
         self.pcode = code
     
     @property
@@ -21,10 +21,10 @@ class HospitalServiceCode:
         return self.pdescription
     
     @description.setter
-    def setdescription(self, description):
+    def description(self, description):
         self.pdescription = description
     
     def __str__(self):
-        out = "<"+ str(self.code) + ": " + self.description.encode('utf-8') + ">"
+        out = "<"+ str(self.code) + ": " + self.description + ">"
 
         return out

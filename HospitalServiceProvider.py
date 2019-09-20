@@ -21,7 +21,7 @@ class HospitalServiceProvider(JsonHttpRetriever):
         jsonservices = self.load()
 
         if self.areThereErrors():
-            print "CRITICAL: server side error:", self.rawdata
+            print("CRITICAL: server side error:", self.rawdata)
             return []
 
         services = []

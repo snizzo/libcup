@@ -32,7 +32,7 @@ class CustomFilter:
     
     def apply(self, item):
         if not hasattr(item, self.prop):
-            print "DateFilter: item.", self.prop, " must exists"
+            print("DateFilter: item.", self.prop, " must exists")
             return
 
         if self.greaterThan!=None:

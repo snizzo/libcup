@@ -14,15 +14,15 @@ class Hospital:
         return self.paddress
     
     @address.setter
-    def setaddress(self, address):
+    def address(self, address):
         self.paddress = address
     
     @property
     def description(self):
-        return self.description
+        return self.pdescription
     
     @description.setter
-    def setdescription(self, description):
+    def description(self, description):
         self.pdescription = description
     
     @property
@@ -30,13 +30,13 @@ class Hospital:
         return self.pid_hospital
     
     @id_hospital.setter
-    def setid_hospital(self, id_hospital):
+    def id_hospital(self, id_hospital):
         self.pid_hospital = id_hospital
     
     def __str__(self):
         out = "---HOSPITAL---\n"
-        out +="address:\t" + self.address.encode('utf-8') +"\n"
+        out +="address:\t" + self.address +"\n"
         out +="id_hospital:\t" + str(self.id_hospital) +"\n"
-        out +="description:\t" + self.description.encode('utf-8') +"\n"
+        out +="description:\t" + self.description +"\n"
 
         return out
