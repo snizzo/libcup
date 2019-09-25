@@ -1,75 +1,56 @@
-
-#from datetime import datetime, timedelta
-""" import gi
-gi.require_version('Notify', '0.7')
-from gi.repository import Notify """
-
-
-
-
-
-
 from libcup import CUP
 from DateConverter import DateConverter
 from FilterList import FilterList
 from DateFilter import DateFilter
 
+import argparse
+
+import sys
+
+desctext = "Fast and efficient hospital booker."
+
+parser = argparse.ArgumentParser(description=desctext)
+parser.add_argument("--service", "-s", help="Look for hospital service code")
+parser.add_argument("--hospital", "-ho", help="Look for hospital code", action="store_true")
+parser.add_argument("--book", "-b", help="Look for bookable appointments within a time rage of 1 week", action="store_true")
+parser.add_argument("--servicecode", "-sc", help="Service code")
+parser.add_argument("--hospitalcode", "-hc", help="Hospital code")
+parser.add_argument("--ssn", "-ssn", help="Social security number")
+parser.add_argument("--priority", "-p", help="Service priority")
+
+args = parser.parse_args()
+
+#creating libcup object
 c = CUP()
 
-'''
-Get codes for every possible hospital service
-'''
-codes = c.getHospitalServiceCodes()
+#fastcup.py --service ecografia
+if args.service:
+    codes = c.getHospitalServiceCodes(args.service)
 
-for code in codes:
-    print(code)
+    for code in codes:
+        print(code)
 
-'''
-Get all available hospital services
-'''
-services = c.getHospitalServices("P395","P","30063","--------------")
+#fastcup.py --servicecode P395 --priority P
+if args.hospital:
+    hospitals = c.getHospitals(args.servicecode, args.priority)
 
-for service in services:
-    print(service)
+    for hospital in hospitals:
+        print(hospital)
 
-'''
-Hospital service filtering example
-'''
-fl = FilterList(services)
-f = DateFilter()
-f.setGreaterThan(DateConverter.today())
-f.setSmallerThan(DateConverter.today()+DateConverter.delta(200))
-fl.addFilter(f)
-print(fl.getFiltered())
+#python fastcup.py --book --servicecode P3039 --priority D --hospitalcode 30063 --ssn <AAABBB12X34Y567Z>
+if args.book:
+    services = c.getHospitalServices(args.servicecode,args.priority,args.hospitalcode,args.ssn)
 
+    fl = FilterList(services)
+    f = DateFilter()
+    f.setGreaterThan(DateConverter.today())
+    f.setSmallerThan(DateConverter.today()+DateConverter.delta(7))
+    fl.addFilter(f)
+    results = fl.getFiltered()
 
-'''
-Get every hospital performing HospitalService with code P395 and priority P
-'''
-hospitals = c.getHospitals("P395", "P")
-
-for hospital in hospitals:
-    print(hospital)
+    for result in results:
+        print(result)
 
 
 
 
-
-
-'''
-TODO: implement date filter and notification systems
-
-Notify.init("FastCUP")
-
-offerings = json.loads(data.text)
-
-today = datetime.today()
-
-for item in offerings:
-    date = item['date'][0]['data']
-    datetime = datetime.strptime(date, '%Y-%m-%d')
-    
-    if datetime-today < timedelta(hours=168):
-        desc = description+"Data: "+str(datetime)
-        Notify.Notification.new("--- FASTCUP MESSAGGIO URGENTE ---", desc).show()
-'''
