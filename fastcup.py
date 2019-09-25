@@ -5,7 +5,7 @@ from DateFilter import DateFilter
 
 import argparse
 
-import sys
+import sys, time
 
 desctext = "Fast and efficient hospital booker."
 
@@ -17,6 +17,7 @@ parser.add_argument("--servicecode", "-sc", help="Service code")
 parser.add_argument("--hospitalcode", "-hc", help="Hospital code")
 parser.add_argument("--ssn", "-ssn", help="Social security number")
 parser.add_argument("--priority", "-p", help="Service priority")
+parser.add_argument("--notify", "-n", help="Requests a longpoll and periodic notification", action="store_true")
 
 args = parser.parse_args()
 
@@ -51,6 +52,21 @@ if args.book:
     for result in results:
         print(result)
 
+if args.notify:
+    while True:
+        print("fetching timeslots...")
+        services = c.getHospitalServices(args.servicecode,args.priority,args.hospitalcode,args.ssn)
+
+        fl = FilterList(services)
+        f = DateFilter()
+        f.setGreaterThan(DateConverter.today())
+        f.setSmallerThan(DateConverter.today()+DateConverter.delta(7))
+        fl.addFilter(f)
+        results = fl.getFiltered()
+
+        for result in results:
+            print(result)
+        time.sleep(10)
 
 
 
