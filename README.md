@@ -20,6 +20,10 @@ python fastcup.py --hospital --servicecode P395 --priority P
 ```bash
 python fastcup.py --book --servicecode P3039 --priority D --hospitalcode 30063 --ssn <AAABBB12X34Y567Z>
 ```
+4. Poll server until a good appointment is found:
+```bash
+python fastcup.py --notify --servicecode P3039 --priority D --hospitalcode 30063 --ssn <AAABBB12X34Y567Z>
+```
 
 If there are any, FastCup will try to notify you.
 
