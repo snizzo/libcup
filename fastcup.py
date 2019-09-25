@@ -2,12 +2,13 @@ from libcup import CUP
 from DateConverter import DateConverter
 from FilterList import FilterList
 from DateFilter import DateFilter
+from SessionedRequest import SessionedRequest
 
 import argparse
 
 from notify_run import Notify
 
-import sys, time
+import sys, time, json
 
 desctext = "Fast and efficient hospital booker."
 
@@ -73,17 +74,20 @@ if args.notify:
     while True:
         c = CUP()
         print("fetching timeslots...")
-        services = c.getHospitalServices(args.servicecode,args.priority,args.hospitalcode,args.ssn)
+        try:
+            services = c.getHospitalServices(args.servicecode,args.priority,args.hospitalcode,args.ssn)
+            fl = FilterList(services)
+            f = DateFilter()
+            f.setGreaterThan(DateConverter.today())
+            f.setSmallerThan(DateConverter.today()+DateConverter.delta(7))
+            fl.addFilter(f)
+            results = fl.getFiltered()
 
-        fl = FilterList(services)
-        f = DateFilter()
-        f.setGreaterThan(DateConverter.today())
-        f.setSmallerThan(DateConverter.today()+DateConverter.delta(7))
-        fl.addFilter(f)
-        results = fl.getFiltered()
-
-        if len(results)>0:
-            notify.send("Appointment found!!")
+            if len(results)>0:
+                notify.send("Appointment found!!")
+        except json.decoder.JSONDecodeError:
+            print("regenerating session...")
+            SessionedRequest.reload()
         
         time.sleep(secs)
 
