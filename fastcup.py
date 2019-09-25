@@ -20,6 +20,7 @@ parser.add_argument("--hospitalcode", "-hc", help="Hospital code")
 parser.add_argument("--ssn", "-ssn", help="Social security number")
 parser.add_argument("--priority", "-p", help="Service priority")
 parser.add_argument("--notify", "-n", help="Requests a longpoll and periodic notification", action="store_true")
+parser.add_argument("--seconds", "-secs", help="Seconds between calls")
 
 args = parser.parse_args()
 
@@ -54,9 +55,14 @@ if args.book:
     for result in results:
         print(result)
 
+#python fastcup.py --notify --servicecode P3039 --priority D --hospitalcode 30063 --ssn <AAABBB12X34Y567Z>
 if args.notify:
     notify = Notify()
     qr = notify.register()
+
+    secs = 120
+    if args.seconds:
+        secs = args.seconds
 
     print("Please subscribe to this push channel to receive notification directly on your device (pc, phone, ...)")
 
@@ -77,7 +83,8 @@ if args.notify:
 
         if len(results)>0:
             notify.send("Appointment found!!")
-        time.sleep(1000)
+        
+        time.sleep(secs)
 
 
 
