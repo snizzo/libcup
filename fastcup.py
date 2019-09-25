@@ -24,11 +24,9 @@ parser.add_argument("--seconds", "-secs", help="Seconds between calls")
 
 args = parser.parse_args()
 
-#creating libcup object
-c = CUP()
-
 #fastcup.py --service ecografia
 if args.service:
+    c = CUP()
     codes = c.getHospitalServiceCodes(args.service)
 
     for code in codes:
@@ -36,6 +34,7 @@ if args.service:
 
 #fastcup.py --hospital --servicecode P395 --priority P
 if args.hospital:
+    c = CUP()
     hospitals = c.getHospitals(args.servicecode, args.priority)
 
     for hospital in hospitals:
@@ -43,6 +42,7 @@ if args.hospital:
 
 #python fastcup.py --book --servicecode P3039 --priority D --hospitalcode 30063 --ssn <AAABBB12X34Y567Z>
 if args.book:
+    c = CUP()
     services = c.getHospitalServices(args.servicecode,args.priority,args.hospitalcode,args.ssn)
 
     fl = FilterList(services)
@@ -71,6 +71,7 @@ if args.notify:
     input("Press Enter to continue...")
 
     while True:
+        c = CUP()
         print("fetching timeslots...")
         services = c.getHospitalServices(args.servicecode,args.priority,args.hospitalcode,args.ssn)
 
