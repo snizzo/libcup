@@ -30,7 +30,7 @@ if args.service:
     for code in codes:
         print(code)
 
-#fastcup.py --servicecode P395 --priority P
+#fastcup.py --hospital --servicecode P395 --priority P
 if args.hospital:
     hospitals = c.getHospitals(args.servicecode, args.priority)
 
