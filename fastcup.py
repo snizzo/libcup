@@ -5,6 +5,8 @@ from DateFilter import DateFilter
 
 import argparse
 
+from notify_run import Notify
+
 import sys, time
 
 desctext = "Fast and efficient hospital booker."
@@ -53,6 +55,15 @@ if args.book:
         print(result)
 
 if args.notify:
+    notify = Notify()
+    qr = notify.register()
+
+    print("Please subscribe to this push channel to receive notification directly on your device (pc, phone, ...)")
+
+    print(qr)
+
+    input("Press Enter to continue...")
+
     while True:
         print("fetching timeslots...")
         services = c.getHospitalServices(args.servicecode,args.priority,args.hospitalcode,args.ssn)
@@ -64,9 +75,9 @@ if args.notify:
         fl.addFilter(f)
         results = fl.getFiltered()
 
-        for result in results:
-            print(result)
-        time.sleep(10)
+        if len(results)>0:
+            notify.send("Appointment found!!")
+        time.sleep(1000)
 
 
 
