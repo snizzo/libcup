@@ -10,6 +10,12 @@ class SessionedRequest:
     isSessioned = False
 
     @staticmethod
+    def reload():
+        del SessionedRequest.req
+        SessionedRequest.req = requests.Session()
+        SessionedRequest.isSessioned = False
+
+    @staticmethod
     def get():
         if not SessionedRequest.isSessioned:
             SessionedRequest.req.get('https://servizionline.sanita.fvg.it/prenotazioni')

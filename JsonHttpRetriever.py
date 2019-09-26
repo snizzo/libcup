@@ -1,5 +1,4 @@
 from SessionedRequest import SessionedRequest
-    
 
 class JsonHttpRetriever:
     def __init__(self):
@@ -20,7 +19,9 @@ class JsonHttpRetriever:
         self.rawdata = r.content
         if self.verbose:
             print(self.getRawData())
+
         self.data = r.json()
+
         return self.data
 
     def getRawData(self):
