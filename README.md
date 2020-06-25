@@ -28,9 +28,7 @@ python fastcup.py --notify --servicecode P3039 --priority D --hospitalcode 30063
 If there are any, FastCup will try to notify you.
 
 #### Efficiency and ethical issues
-FastCup has no ethical issues as it enhances speed and efficiency for all users and service providers (hospitals). Being a software that permits to book appointments withing a very short timespan it is less likely that this appointments won't be cancelled and therefore time is not wasted.
+FastCup has no ethical issues as it enhances speed and efficiency for all users and service providers (hospitals). Italian patients often tend to preemptively overbook the sanitary system. Fastcup permits to book appointments belonging to a timeframe that has probably already being cancelled by other patients. Usually appointments that are cancelled so late in time aren't scheduled at all effectively wasting the timeslot, worsening both patients and hospitals queues.
+As of today there's no built-in dynamic rebooking mechanism to solve this issue.
 
-99% of the time, free timeslots are popping up because italian patients often tend to preemptively overbook the sanitary system and then cancelling appointments last minute when not needed. This leads to a major time waste for the hospitals without some timeslots free in the short term and many occupied in the long term.
-As of today there's no built-in dynamic rebooking mechanism to solve this issue and **fastcup** aims exactly to that.
-
-As a result, **fastcup** only put in use timeslots that would already be wasted, enhancing hospital efficiency by using blank time, and lowering overall patients queue length by offloading long-term visits to short term, where possible. Win-Win.
+As a result, **fastcup** only put in use timeslots that would already be wasted, enhancing hospital efficiency by using blank time, and lowering overall patients queue length by offloading long-term visits to short term, where possible.
